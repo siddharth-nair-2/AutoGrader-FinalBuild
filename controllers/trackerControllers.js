@@ -5,7 +5,7 @@ const {
   Course,
   Submission,
   Plagiarism,
-} = require("../Models/trackerModel");
+} = require("../models/trackerModel");
 
 const courseCreate = asyncHandler(async (req, res) => {
   const { name, description, semester, instructor, courseID, section } =
