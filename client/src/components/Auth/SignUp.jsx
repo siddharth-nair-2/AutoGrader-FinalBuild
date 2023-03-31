@@ -258,7 +258,7 @@ const Signup = () => {
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
-        if (error.response.statusText === "Bad Request") {
+        if (error.response.statusText === "InUse") {
           toast({
             title: "Error",
             description: "Email already in use!",
