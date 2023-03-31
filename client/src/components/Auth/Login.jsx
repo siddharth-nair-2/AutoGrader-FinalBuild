@@ -181,7 +181,7 @@ const Login = () => {
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
-        if (error.response.statusText === "Unauthorized") {
+        if (error.response.data === "Invalid Credentials") {
           toast({
             title: "Incorrect credentials!",
             description: "Please check your email or password.",

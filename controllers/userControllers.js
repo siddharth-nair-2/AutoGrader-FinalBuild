@@ -72,8 +72,8 @@ const authUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(401);
-    throw new Error("Incorrect Email or Password");
+    res.status(401).send("Invalid Credentials");
+    throw new Error("Invalid Credentials");
   }
 });
 
