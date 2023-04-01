@@ -39,10 +39,10 @@ function App() {
         {user && user.userType === "Student" && (
           <Route path="/signup" element={<Navigate replace to="/" />} />
         )}
-        {user && (
+        {user && user.userType === "Instructor" && (
           <Route path="/createcourses" exact element={<CreateCourses />} />
         )}
-        {user && (
+        {user && user.userType === "Instructor" &&  (
           <Route
             path="/createassignment"
             exact
