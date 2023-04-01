@@ -667,7 +667,7 @@ const StudentAssignments = () => {
             },
           };
           const { data } = await axios.post(
-            "http://plagiarism-server.siddharthnair.info:8080/plagiarism/",
+            "https://plagiarism-server.siddharthnair.info/plagiarism/",
             {
               studentName: `${user.firstName} ${user.lastName}`,
               studentID: user._id,
