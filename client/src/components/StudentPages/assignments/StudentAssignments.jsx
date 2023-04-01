@@ -386,7 +386,7 @@ const StudentAssignments = () => {
         };
         const options = {
           method: "POST",
-          url: "http://34.130.217.14:2358/submissions",
+          url: "https://judge0-server.siddharthnair.info/submissions/",
           data: data,
         };
 
@@ -415,7 +415,7 @@ const StudentAssignments = () => {
   const checkStatus = async (token, caseIndex) => {
     const options = {
       method: "GET",
-      url: "http://34.130.217.14:2358/submissions/" + token,
+      url: "https://judge0-server.siddharthnair.info/submissions/" + token,
     };
     try {
       let response = await axios.request(options);
