@@ -667,7 +667,7 @@ const StudentAssignments = () => {
             },
           };
           const { data } = await axios.post(
-            "http://localhost:8080/plagiarism/",
+            "http://34.130.145.153:8080/plagiarism/",
             {
               studentName: `${user.firstName} ${user.lastName}`,
               studentID: user._id,
