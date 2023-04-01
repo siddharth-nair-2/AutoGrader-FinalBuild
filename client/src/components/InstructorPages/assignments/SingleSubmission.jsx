@@ -181,6 +181,9 @@ const SingleSubmission = () => {
               <QuestionInfo style={{ marginTop: "50px" }}>
                 <QInfo>Test Cases Passed: {activeSubmission.testCases}</QInfo>
               </QuestionInfo>
+              <QuestionInfo style={{ marginTop: "50px" }}>
+                <QInfo>Code By: {activeSubmission.studentName}</QInfo>
+              </QuestionInfo>
             </div>
             <EditorBox>
               <UserInfoBox>
