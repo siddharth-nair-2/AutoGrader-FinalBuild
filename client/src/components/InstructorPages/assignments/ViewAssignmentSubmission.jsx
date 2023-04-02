@@ -203,6 +203,54 @@ const ViewAssignmentSubmission = () => {
     setGridColumnApi(params.columnApi);
   };
 
+  const handleVisibilityToggle = async () => {
+    if (
+      window.confirm(
+        `The assignment is currently ${
+          selectedAssignment.visibleToStudents ? "" : "not "
+        }visible to students! Are you sure you want to change this?`
+      )
+    ) {
+      try {
+        const data = await axios
+          .post("/api/tracker/updateAssignment", {
+            assignmentID: JSON.parse(localStorage.getItem("assignmentInfo"))
+              ._id,
+            courseID: JSON.parse(localStorage.getItem("assignmentInfo"))
+              .courseID,
+            visibleToStudents: !JSON.parse(
+              localStorage.getItem("assignmentInfo")
+            ).visibleToStudents,
+          })
+          .then(() =>
+            toast({
+              title: "Visibility Changed!",
+              description: `The assignment is ${
+                JSON.parse(localStorage.getItem("assignmentInfo"))
+                  .visibleToStudents
+                  ? "not "
+                  : ""
+              }visible to students!`,
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+              position: "bottom-left",
+            })
+          )
+          .then(() => navigate("/course"));
+      } catch (error) {
+        toast({
+          title: "Error Occured!",
+          description: "Failed to Delete the assignment",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom-left",
+        });
+      }
+    }
+  };
+
   const handleAssignmentDelete = async () => {
     if (window.confirm("Are you sure you want to delete this assignment?")) {
       try {
@@ -311,25 +359,39 @@ const ViewAssignmentSubmission = () => {
                   ></AgGridReact>
                 </div>
               </CourseBox>
-              <Link
-                to={"/plagiarism"}
+              <div
                 style={{
                   marginLeft: "auto",
                   marginRight: "auto",
+                  display: "flex",
                 }}
               >
+                <Link to={"/plagiarism"}>
+                  <CourseButtons
+                    style={{
+                      fontSize: "18px",
+                      marginTop: "50px",
+                      width: "200px",
+                      padding: "10px",
+                      backgroundColor: "#46282F",
+                    }}
+                  >
+                    Plagiarism List
+                  </CourseButtons>
+                </Link>
                 <CourseButtons
                   style={{
                     fontSize: "18px",
                     marginTop: "50px",
                     width: "200px",
                     padding: "10px",
-                    backgroundColor: "#46282F",
+                    backgroundColor: "Black",
                   }}
+                  onClick={handleVisibilityToggle}
                 >
-                  Plagiarism List
+                  Toggle Visibility
                 </CourseButtons>
-              </Link>
+              </div>
             </div>
           }
         </>

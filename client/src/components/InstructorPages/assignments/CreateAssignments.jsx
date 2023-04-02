@@ -173,7 +173,6 @@ const CreateAssignments = () => {
     const { name, value } = e.target;
     let questionsListCopy = JSON.parse(JSON.stringify(questionList));
     questionsListCopy[outerIndex].testCases[innerIndex][name] = value;
-    console.log(questionsListCopy);
     setQuestionList(questionsListCopy);
   };
 
@@ -270,7 +269,6 @@ const CreateAssignments = () => {
       });
       return;
     }
-    console.log(questionList);
     try {
       const config = {
         Headers: {
@@ -293,7 +291,16 @@ const CreateAssignments = () => {
       window.location = "/course";
     } catch (error) {
       console.log(error);
-      if (
+      if(error.response.data === "Exists"){
+        toast({
+          title: "Error",
+          description: "An assignment with the same name already exists!",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      }
+      else if (
         error.response &&
         error.response.status >= 400 &&
         error.response.status <= 500

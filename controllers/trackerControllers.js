@@ -78,7 +78,7 @@ const AssignmentCreate = asyncHandler(async (req, res) => {
   }
   const assignmentExists = await Assignment.findOne({ courseID, name });
   if (assignmentExists) {
-    res.status(400);
+    res.status(400).send("Exists");
     throw new Error("This assignment name already exists!");
   }
   let finalDue = new Date(due_date);
@@ -136,6 +136,25 @@ const AssignmentDelete = asyncHandler(async (req, res) => {
     .send(
       "The assignment and related submissions and plagiarism checks were deleted!"
     );
+});
+
+const updateAssignment = asyncHandler(async (req, res) => {
+  try {
+    const { assignmentID, courseID, visibleToStudents } = req.body;
+    const assignment = await Assignment.updateOne(
+      {
+        courseID: courseID,
+        _id: assignmentID,
+      },
+      {
+        visibleToStudents,
+      }
+    );
+    res.status(200).send(assignment);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
+  }
 });
 
 const plagiarismCreate = asyncHandler(async (req, res) => {
@@ -466,6 +485,7 @@ module.exports = {
   courseCreate,
   getCourses,
   AssignmentCreate,
+  updateAssignment,
   getAssignments,
   getSingleCourse,
   getStudentCourses,

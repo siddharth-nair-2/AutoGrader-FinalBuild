@@ -180,7 +180,6 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!terms) {
-      console.log(terms);
       toast({
         title: "Terms & Conditions!",
         description: "Please read through and accept the Terms & Conditions!",

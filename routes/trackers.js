@@ -15,6 +15,7 @@ const {
   updateSubmission,
   getAllPlagiarisms,
   AssignmentDelete,
+  updateAssignment,
 } = require("../controllers/trackerControllers");
 const { protect } = require("../middleware/authMiddleware");
 
@@ -33,6 +34,7 @@ router.route("/singleCourse").post(getSingleCourse);
 router.route("/assignment").post(AssignmentCreate);
 router.route("/assignmentDelete").post(AssignmentDelete);
 router.route("/assignmentGet").post(getAssignments);
+router.route("/updateAssignment").post(updateAssignment);
 router.route("/studentAssignmentsGet").post(getStudentAssignments);
 router.route("/createComparison").post(plagiarismCreate);
 
